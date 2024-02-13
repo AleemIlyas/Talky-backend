@@ -28,7 +28,7 @@ class UserController {
             res.status(200).send({ user: user, token: token, expireTime: expireTime })
         }
         catch (err) {
-            res.status(400).json(err)
+            res.status(400).send(err)
         }
     }
 
