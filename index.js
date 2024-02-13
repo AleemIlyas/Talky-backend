@@ -11,6 +11,7 @@ require('dotenv').config()
 const { addMessage, addVoiceMessage } = require('./src/Controller/messageController')
 const { accessChat, getChat } = require('./src/Controller/chatController')
 const { Blob } = require('buffer')
+const PORT = process.env.PORT
 const io = new Server(server, {
     cors: '*'
 })
@@ -131,7 +132,7 @@ io.on('connection', (socket) => {
 const start = async function () {
     try {
         await main(process.env.DB_URL);
-        server.listen(3001, () => {
+        server.listen(PORT, () => {
             console.log("Server is listening on port 3001");
         });
     } catch (error) {
