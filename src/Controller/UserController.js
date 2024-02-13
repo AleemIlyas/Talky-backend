@@ -14,7 +14,8 @@ class UserController {
             res.send({ user: user, token: token, expireTime })
         }
         catch (err) {
-            res.status(501).send(err)
+            const errorMessage = err.message || 'An error occurred.';
+            res.status(400).send({ error: errorMessage });
         }
     }
 
@@ -28,7 +29,8 @@ class UserController {
             res.status(200).send({ user: user, token: token, expireTime: expireTime })
         }
         catch (err) {
-            res.status(400).send(err)
+            const errorMessage = err.message || 'An error occurred during login.';
+            res.status(400).send({ error: errorMessage });
         }
     }
 
