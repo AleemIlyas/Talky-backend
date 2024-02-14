@@ -14,14 +14,14 @@ const { Blob } = require('buffer')
 const PORT = process.env.PORT
 const io = new Server(server, {
     cors: {
-        origin: 'https://talky-gules.vercel.app',
+        origin: 'https://talky-4d2ff.web.app',
         methods: ['GET', 'POST']
 
     }
 })
 const main = require('./src/db/db');
 app.use(cors({
-    origin: "https://talky-gules.vercel.app",
+    origin: "https://talky-4d2ff.web.app",
     methods: ['GET', 'POST']
 }))
 app.use(bodyParser.json())
