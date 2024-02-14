@@ -14,14 +14,16 @@ const { Blob } = require('buffer')
 const PORT = process.env.PORT
 const io = new Server(server, {
     cors: {
-        origin: 'https://talky-4d2ff.web.app',
+        // origin: 'https://talky-4d2ff.web.app',
+        origin: '*',
         methods: ['GET', 'POST']
 
     }
 })
 const main = require('./src/db/db');
 app.use(cors({
-    origin: "https://talky-4d2ff.web.app",
+    // origin: "https://talky-4d2ff.web.app",
+    origin: "*",
     methods: ['GET', 'POST']
 }))
 app.use(bodyParser.json())
@@ -61,15 +63,12 @@ io.on('connection', (socket) => {
             }
         } catch (err) {
             // Handle unexpected errors
-            console.error('Unexpected error:', err);
             socket.emit('error', { error: 'Something went wrong' });
         }
     });
 
     socket.on('getChat', async (chatId, callback) => {
-        console.log(chatId)
         let chat = await getChat(user, chatId);
-        console.log(chat)
         callback(chat)
     })
 
@@ -82,7 +81,7 @@ io.on('connection', (socket) => {
             const audioData = `data:audio/mp3;base64,${base64Audio}`;
             let response = await addVoiceMessage(id, audioData, socket.handshake.auth.user, type)
 
-            io.to(id).emit("messageReceived", response)
+            io.to(id).emit("messageReceived", { response: response, chatId: id })
         }
         catch (err) {
             console.log(err)
