@@ -13,11 +13,13 @@ const { accessChat, getChat } = require('./src/Controller/chatController')
 const { Blob } = require('buffer')
 const PORT = process.env.PORT
 const io = new Server(server, {
-    cors: '*'
+    cors: {
+        origin: 'https://talky-gules.vercel.app/'
+    }
 })
 const main = require('./src/db/db');
 app.use(cors({
-    origin: "*",
+    origin: "https://talky-gules.vercel.app/",
     methods: ['GET', 'POST']
 }))
 app.use(bodyParser.json())
